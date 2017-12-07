@@ -1,4 +1,5 @@
 import java.util.Arrays;
+import java.util.Objects;
 
 public class Primes {
     private String primesAsString;
@@ -27,6 +28,23 @@ public class Primes {
 
     public void setPrimesAsArray(long[] primesAsArray) {
         this.primesAsArray = primesAsArray;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Primes primes = (Primes) o;
+        return Objects.equals(primesAsString, primes.primesAsString) &&
+                Arrays.equals(primesAsArray, primes.primesAsArray);
+    }
+
+    @Override
+    public int hashCode() {
+
+        int result = Objects.hash(primesAsString);
+        result = 31 * result + Arrays.hashCode(primesAsArray);
+        return result;
     }
 
     @Override

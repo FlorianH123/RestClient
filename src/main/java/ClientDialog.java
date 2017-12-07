@@ -3,15 +3,15 @@ import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class ClientDialog {
-    private static final String STRING_HEADER = "--- Primzahl Abfrage ---\n";
-    private static final String STRING_N_PRIMES = "Geben Sie die Anzahl der Primzahlen an, die Sie erhalten möchten: ";
-    private static final String STRING_IMPUT_MISMATCH = "Falsche Eingabe!\n";
-    private static final String STRING_NEW_N_PRIMES = "Neue Anzahl an Primzahlen festlegen\t\t\t\t\t\t\t\t<1>";
+    private static final String STRING_HEADER           = "--- Primzahl Abfrage ---\n";
+    private static final String STRING_N_PRIMES         = "Geben Sie die Anzahl der Primzahlen an, die Sie erhalten möchten: ";
+    private static final String STRING_INPUT_MISMATCH   = "Falsche Eingabe!\n";
+    private static final String STRING_NEW_N_PRIMES     = "Neue Anzahl an Primzahlen festlegen\t\t\t\t\t\t\t\t<1>";
 
-    private static final int INT_NEW_N_PRIMES = 1;
-    private static final int INT_PRIMES_AS_STRING = 2;
-    private static final int INT_PRIMES_AS_ARRAY = 3;
-    private static final int INT_PRIMES_AS_STRUCT = 4;
+    private static final int INT_NEW_N_PRIMES       = 1;
+    private static final int INT_PRIMES_AS_STRING   = 2;
+    private static final int INT_PRIMES_AS_ARRAY    = 3;
+    private static final int INT_PRIMES_AS_STRUCT   = 4;
 
     private Scanner scanner;
     private int nPrimes;
@@ -47,7 +47,7 @@ public class ClientDialog {
                 break;
 
             default:
-                System.out.println(STRING_IMPUT_MISMATCH);
+                System.out.println(STRING_INPUT_MISMATCH);
                 break;
         }
     }
@@ -63,8 +63,6 @@ public class ClientDialog {
                 nPrimes = scanner.nextInt();
 
                 System.out.println();
-
-
                 System.out.println(STRING_NEW_N_PRIMES);
                 System.out.println("Erste(n) " + nPrimes + " Primzahlen als String abfragen\t\t\t\t\t\t<2>");
                 System.out.println("Erste(n) " + nPrimes + " Primzahlen als Array abfragen\t\t\t\t\t\t<3>");
@@ -77,7 +75,7 @@ public class ClientDialog {
 
                 switchTask(selection);
             } catch (InputMismatchException ex) {
-                System.out.println(STRING_IMPUT_MISMATCH);
+                System.out.println(STRING_INPUT_MISMATCH);
                 scanner.next();
             }
         }

@@ -3,8 +3,10 @@ import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class ClientDialog {
+    private static final String STRING_USAGE            = "Sie muessen die IP des Server als Argument uebergeben!\n";
+
     private static final String STRING_HEADER           = "--- Primzahl Abfrage ---\n";
-    private static final String STRING_N_PRIMES         = "Geben Sie die Anzahl der Primzahlen an, die Sie erhalten möchten: ";
+    private static final String STRING_N_PRIMES         = "Geben Sie die Anzahl der Primzahlen an, die Sie erhalten moechten: ";
     private static final String STRING_INPUT_MISMATCH   = "Falsche Eingabe!\n";
     private static final String STRING_NEW_N_PRIMES     = "Neue Anzahl an Primzahlen festlegen\t\t\t\t\t\t\t<1>";
     private static final String STRING_PRIMES_AS_STRING = "Erste %d Primzahlen als String abfragen\t\t\t\t\t\t<2>";
@@ -106,6 +108,11 @@ public class ClientDialog {
     }
 
     public static void main(String[] args) {
+        if (args.length < 1) {
+            System.out.println(STRING_USAGE);
+            System.exit(1);
+        }
+
         new ClientDialog(args[0]).startDialog();
     }
 }

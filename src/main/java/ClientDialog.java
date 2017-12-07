@@ -1,81 +1,89 @@
+import java.util.Arrays;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class ClientDialog {
-    private static final String HEADER = "--- Primzahl Abfrage ---\n";
-    private static final String N_PRIMZAHLEN_ANZAHL = "Geben Sie die Anzahl der Primzahlen an, die Sie erhalten möchten: ";
-    private static final String FALSCHE_EINGABE = "Falsche Eingabe!\n";
-    private static final String STRING_NEUE_ANZAHL_PRIMZAHLEN = "Neue Anzahl an Primzahlen festlegen\t\t\t\t\t\t\t\t<1>";
+    private static final String STRING_HEADER = "--- Primzahl Abfrage ---\n";
+    private static final String STRING_N_PRIMES = "Geben Sie die Anzahl der Primzahlen an, die Sie erhalten möchten: ";
+    private static final String STRING_IMPUT_MISMATCH = "Falsche Eingabe!\n";
+    private static final String STRING_NEW_N_PRIMES = "Neue Anzahl an Primzahlen festlegen\t\t\t\t\t\t\t\t<1>";
 
-
-    private static final int NEUE_ANZAHL_PRIMZAHL = 1;
-    private static final int PRIMZAHLEN_ALS_STRING = 2;
-    private static final int PRIMZAHLEN_ALS_ARRAY = 3;
-    private static final int PRIMZAHLEN_ALS_STRUKTUR = 4;
+    private static final int INT_NEW_N_PRIMES = 1;
+    private static final int INT_PRIMES_AS_STRING = 2;
+    private static final int INT_PRIMES_AS_ARRAY = 3;
+    private static final int INT_PRIMES_AS_STRUCT = 4;
 
     private Scanner scanner;
-    private int nPrimzahlen;
+    private int nPrimes;
+    private String baseUrl;
 
-    private ClientDialog() {
-        nPrimzahlen = 0;
+    private ClientDialog(String baseUrl) {
+        this.baseUrl = baseUrl;
+        nPrimes = 0;
         scanner = new Scanner(System.in);
+
     }
 
-    private void switchTask(int auswahl) {
-        switch (auswahl) {
-            case NEUE_ANZAHL_PRIMZAHL:
-                System.out.print(N_PRIMZAHLEN_ANZAHL);
-                nPrimzahlen = scanner.nextInt();
+    private void switchTask(int selection) {
+        ClientApp clientApp = new ClientApp(baseUrl);
+
+        switch (selection) {
+            case INT_NEW_N_PRIMES:
+                System.out.print(STRING_N_PRIMES);
+                nPrimes = scanner.nextInt();
                 System.out.println();
                 break;
 
-            case PRIMZAHLEN_ALS_STRING:
+            case INT_PRIMES_AS_STRING:
+                System.out.println(clientApp.getPrimesAsString(nPrimes));
                 break;
 
-            case PRIMZAHLEN_ALS_ARRAY:
+            case INT_PRIMES_AS_ARRAY:
+                System.out.println(Arrays.toString(clientApp.getPrimesAsArray(nPrimes)));
                 break;
 
-            case PRIMZAHLEN_ALS_STRUKTUR:
+            case INT_PRIMES_AS_STRUCT:
+                System.out.println(clientApp.getPrimesAsObject(nPrimes));
                 break;
 
             default:
-                System.out.println(FALSCHE_EINGABE);
+                System.out.println(STRING_IMPUT_MISMATCH);
                 break;
         }
     }
 
     private void startDialog() {
-        int auswahl = 0;
+        int selection = 0;
 
-        while (auswahl != -1) {
+        while (selection != -1) {
             try {
-                System.out.println(HEADER);
-                System.out.print(N_PRIMZAHLEN_ANZAHL);
+                System.out.println(STRING_HEADER);
+                System.out.print(STRING_N_PRIMES);
 
-                nPrimzahlen = scanner.nextInt();
+                nPrimes = scanner.nextInt();
 
                 System.out.println();
 
 
-                System.out.println(STRING_NEUE_ANZAHL_PRIMZAHLEN);
-                System.out.println("Erste(n) " + nPrimzahlen + " Primzahlen als String abfragen\t\t\t\t\t\t<2>");
-                System.out.println("Erste(n) " + nPrimzahlen + " Primzahlen als Array abfragen\t\t\t\t\t\t<3>");
-                System.out.println("Erste(n) " + nPrimzahlen + " Primzahlen als Struktur (String + Array) abfragen\t<4>\n");
+                System.out.println(STRING_NEW_N_PRIMES);
+                System.out.println("Erste(n) " + nPrimes + " Primzahlen als String abfragen\t\t\t\t\t\t<2>");
+                System.out.println("Erste(n) " + nPrimes + " Primzahlen als Array abfragen\t\t\t\t\t\t<3>");
+                System.out.println("Erste(n) " + nPrimes + " Primzahlen als Struktur (String + Array) abfragen\t<4>\n");
 
 
                 System.out.print("> ");
-                auswahl = scanner.nextInt();
+                selection = scanner.nextInt();
                 System.out.println();
 
-                switchTask(auswahl);
+                switchTask(selection);
             } catch (InputMismatchException ex) {
-                System.out.println(FALSCHE_EINGABE);
+                System.out.println(STRING_IMPUT_MISMATCH);
                 scanner.next();
-
             }
         }
     }
+
     public static void main(String[] args) {
-        new ClientDialog().startDialog();
+        new ClientDialog(args[1]).startDialog();
     }
 }

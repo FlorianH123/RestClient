@@ -21,7 +21,6 @@ public class ClientDialog {
         this.baseUrl = baseUrl;
         nPrimes = 0;
         scanner = new Scanner(System.in);
-
     }
 
     private void switchTask(int selection) {

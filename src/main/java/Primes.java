@@ -9,7 +9,6 @@ public class Primes {
     }
 
     public Primes(String primesAsString, long[] primesAsArray) {
-
         this.primesAsString = primesAsString;
         this.primesAsArray = primesAsArray;
     }
@@ -41,7 +40,6 @@ public class Primes {
 
     @Override
     public int hashCode() {
-
         int result = Objects.hash(primesAsString);
         result = 31 * result + Arrays.hashCode(primesAsArray);
         return result;

@@ -53,9 +53,6 @@ public class ClientDialog {
             } catch (InputMismatchException ex) {
                 System.out.println(STRING_INPUT_MISMATCH);
                 scanner.next();
-
-            } catch (Exception ex) {
-                 ex.printStackTrace();
             }
         }
     }
@@ -88,14 +85,17 @@ public class ClientDialog {
 
             case INT_PRIMES_AS_STRING:
                 System.out.println(clientApp.getPrimesAsString(nPrimes));
+                System.out.println();
                 break;
 
             case INT_PRIMES_AS_ARRAY:
                 System.out.println(Arrays.toString(clientApp.getPrimesAsArray(nPrimes)));
+                System.out.println();
                 break;
 
             case INT_PRIMES_AS_OBJECT:
                 System.out.println(clientApp.getPrimesAsObject(nPrimes));
+                System.out.println();
                 break;
 
             case INT_END:

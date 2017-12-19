@@ -29,7 +29,7 @@ public class ClientApp {
     public Primes getPrimesAsObject(int nPrimes) {
         return webTarget
                 .queryParam(QUERY_PARAM, nPrimes)
-                .request(MediaType.APPLICATION_JSON)
+                .request(MediaType.APPLICATION_XML)
                 .get(Primes.class);
     }
 }
